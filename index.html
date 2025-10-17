@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Corrective Deformer for Maya - Pose-Based Corrective Blendshape Prediction</title>
+    <meta name="description" content="A machine learning-powered corrective deformer system for Autodesk Maya that learns and applies pose-based shape corrections automatically.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Segoe UI Symbol', 'Segoe UI Emoji', 'Apple Color Emoji', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #24292f;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 3em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #57606a;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .author {
+            font-size: 1.1em;
+            color: #656d76;
+            margin-bottom: 40px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        
+        .btn {
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 1px solid #d0d7de;
+        }
+        
+        .btn-secondary:hover {
+            background: #f6f8fa;
+            border-color: #667eea;
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        
+        .feature {
+            padding: 24px;
+            background: #f6f8fa;
+            border-radius: 12px;
+            border: 1px solid #d0d7de;
+        }
+        
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+        
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+        
+        .feature p {
+            color: #57606a;
+            font-size: 0.95em;
+        }
+        
+        .section {
+            margin: 40px 0;
+        }
+        
+        .section h2 {
+            color: #24292f;
+            font-size: 1.8em;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d0d7de;
+        }
+        
+        .section p {
+            color: #57606a;
+            margin-bottom: 16px;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        ul li {
+            padding: 8px 0;
+            color: #57606a;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #656d76;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.2em;
+            }
+            
+            .header, .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ML Corrective Deformer for Maya</h1>
+            <p class="subtitle">Pose-Based Corrective Blendshape Prediction Using Machine Learning</p>
+            <p class="author">A research implementation by Mayj Amilano</p>
+            
+            <div class="buttons">
+                <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public/archive/refs/heads/main.zip" class="btn btn-primary">
+                    📥 Download Project
+                </a>
+                <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public" class="btn btn-secondary">
+                    💻 View on GitHub
+                </a>
+                <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public#readme" class="btn btn-secondary">
+                    📖 Documentation
+                </a>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>Overview</h2>
+                <p>This project implements a machine learning-based deformer for Autodesk Maya that automatically predicts corrective blendshapes based on skeletal joint poses. The system learns from artist-provided or simulation-derived data to automate the traditionally manual and time-consuming process of creating corrective shapes for character rigs.</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🤖</div>
+                    <h3>ML-Driven Corrections</h3>
+                    <p>Neural networks predict vertex displacements from joint angles</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Performance</h3>
+                    <p>Optimized for viewport playback in Maya</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Artist-Friendly</h3>
+                    <p>Intuitive UI for data collection and model deployment</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Flexible Training</h3>
+                    <p>Multiple architecture options (Standard, Compact, Residual)</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Production-Ready</h3>
+                    <p>Phased implementation from prototype to C++/LibTorch</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Easy Setup</h3>
+                    <p>Complete installation scripts and test scene generation</p>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Neural Architectures</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">73K</div>
+                    <div class="stat-label">Compact Model Params</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Python Implementation</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Key Features</h2>
+                <ul>
+                    <li>Complete Phase 1 Python prototype with Maya Python API 2.0</li>
+                    <li>Three neural network architectures optimized for different use cases</li>
+                    <li>Training pipeline with validation and model export (TorchScript/ONNX)</li>
+                    <li>Data collection tools with automatic and manual capture modes</li>
+                    <li>Installation system with shelf button and test scene generation</li>
+                    <li>Comprehensive documentation and quick-start guides</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>Requirements</h2>
+                <ul>
+                    <li>Autodesk Maya 2020+ (with Python 3.7+)</li>
+                    <li>PyTorch 1.8+</li>
+                    <li>NumPy, SciPy for data processing</li>
+                    <li>GPU recommended for training (CPU supported)</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>Get Started</h2>
+                <p>Download the project and follow the quick-start guide to install the deformer in Maya. The package includes example scenes, training scripts, and complete documentation to help you get up and running quickly.</p>
+                
+                <div class="buttons">
+                    <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public/archive/refs/heads/main.zip" class="btn btn-primary">
+                        Download Now
+                    </a>
+                    <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public/blob/main/QUICKSTART.md" class="btn btn-secondary">
+                        Quick Start Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
