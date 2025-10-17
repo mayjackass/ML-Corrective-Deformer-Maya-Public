@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -306,7 +306,7 @@
         }
 
         .phase-steps li::before {
-            content: '→';
+            content: ' ';
             position: absolute;
             left: 0;
             color: var(--accent-orange);
@@ -376,7 +376,7 @@
         }
 
         .impl-card li::before {
-            content: '●';
+            content: ' ';
             position: absolute;
             left: 0;
             color: var(--accent-orange);
@@ -551,7 +551,7 @@
         }
 
         .benefit-item::before {
-            content: '●';
+            content: ' ';
             position: absolute;
             left: 0;
             color: var(--accent-orange);
@@ -635,7 +635,7 @@
         }
 
         .research-directions li::before {
-            content: '→';
+            content: ' ';
             position: absolute;
             left: 0;
             color: var(--accent-orange);
@@ -746,7 +746,7 @@
         }
 
         .impact-card li::before {
-            content: '●';
+            content: ' ';
             position: absolute;
             left: 0;
             color: var(--accent-cyan);
@@ -810,8 +810,8 @@
     <!-- Hero Section -->
     <div class="hero">
         <div class="hero-icons">
-            <span class="icon-brain">🧠</span>
-            <span class="icon-cube">📦</span>
+            <span class="icon-brain"> </span>
+            <span class="icon-cube"> </span>
         </div>
         <h1>Pose-Based Corrective Blendshape<br>Prediction</h1>
         <h2>Using Machine Learning in Maya</h2>
@@ -838,7 +838,7 @@
         <!-- Abstract Section -->
         <div id="abstract" class="section active">
             <div class="section-header">
-                <span class="section-icon">🧠</span>
+                <span class="section-icon"> </span>
                 <h2>Abstract</h2>
             </div>
 
@@ -853,7 +853,7 @@
             <div class="cards-grid">
                 <div class="card">
                     <div class="card-header">
-                        <span class="card-icon">⚡</span>
+                        <span class="card-icon"> </span>
                         <h3>Problem</h3>
                     </div>
                     <p>Manual corrective sculpting is time-consuming and requires extensive artistic labor</p>
@@ -861,7 +861,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <span class="card-icon">🧠</span>
+                        <span class="card-icon"> </span>
                         <h3>Solution</h3>
                     </div>
                     <p>ML model learns joint pose to vertex correction mapping from artist data</p>
@@ -869,7 +869,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <span class="card-icon">🎯</span>
+                        <span class="card-icon"> </span>
                         <h3>Impact</h3>
                     </div>
                     <p>Real-time automatic corrections reduce rigging time and enable scalable workflows</p>
@@ -889,13 +889,13 @@
         <!-- Background Section -->
         <div id="background" class="section">
             <div class="section-header">
-                <span class="section-icon">📦</span>
+                <span class="section-icon"> </span>
                 <h2>Background</h2>
             </div>
 
             <div class="card" style="margin-bottom: 2rem;">
                 <div class="card-header">
-                    <span class="card-icon">📦</span>
+                    <span class="card-icon"> </span>
                     <h3>Corrective Blendshapes in Production</h3>
                 </div>
                 <p>Corrective blendshapes resolve geometric artifacts during joint articulation. Traditional manual sculpting is time-intensive and requires artistic expertise for each pose variation.</p>
@@ -903,7 +903,7 @@
 
             <div class="card" style="margin-bottom: 2rem;">
                 <div class="card-header">
-                    <span class="card-icon">🧠</span>
+                    <span class="card-icon"> </span>
                     <h3>Machine Learning for Deformation</h3>
                 </div>
                 <p>Neural networks can learn complex pose-to-deformation mappings from training data, enabling automated prediction of corrective shapes based on skeletal configurations.</p>
@@ -911,7 +911,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <span class="card-icon">💻</span>
+                    <span class="card-icon"> </span>
                     <h3>Maya Plugin Architecture</h3>
                 </div>
                 <p>Maya's deformer node system allows custom deformation logic. Integration of ML models into this pipeline enables real-time inference during animation playback.</p>
@@ -921,7 +921,7 @@
         <!-- Methodology Section -->
         <div id="methodology" class="section">
             <div class="section-header">
-                <span class="section-icon">🔬</span>
+                <span class="section-icon"> </span>
                 <h2>Methodology</h2>
             </div>
 
@@ -932,7 +932,7 @@
             <div class="phase">
                 <div class="phase-header">
                     <div class="phase-icon-container">
-                        <span>💾</span>
+                        <span> </span>
                     </div>
                     <div class="phase-title">
                         <h3>Data Collection</h3>
@@ -941,7 +941,7 @@
                 </div>
                 <ul class="phase-steps">
                     <li>Set up standard biped/quadruped rig with joints and skinning</li>
-                    <li>Articulate joints into problem areas (shoulder 45°, 90°, 120°)</li>
+                    <li>Articulate joints into problem areas (shoulder 45 , 90 , 120 )</li>
                     <li>Artist sculpts corrective blendshape or simulation provides mesh</li>
                     <li>Store joint angles as input features, vertex deltas as targets</li>
                 </ul>
@@ -950,7 +950,7 @@
             <div class="phase">
                 <div class="phase-header">
                     <div class="phase-icon-container">
-                        <span>🔧</span>
+                        <span> </span>
                     </div>
                     <div class="phase-title">
                         <h3>Preprocessing</h3>
@@ -958,7 +958,7 @@
                     </div>
                 </div>
                 <ul class="phase-steps">
-                    <li>Normalize joint angles to consistent range (e.g., -π to π → [-1, 1])</li>
+                    <li>Normalize joint angles to consistent range (e.g., -  to     [-1, 1])</li>
                     <li>Represent outputs as vertex deltas relative to base mesh</li>
                     <li>Optionally compress vertex deltas with PCA to reduce dimensionality</li>
                 </ul>
@@ -967,7 +967,7 @@
             <div class="phase">
                 <div class="phase-header">
                     <div class="phase-icon-container">
-                        <span>🧠</span>
+                        <span> </span>
                     </div>
                     <div class="phase-title">
                         <h3>Model Design</h3>
@@ -985,7 +985,7 @@
             <div class="phase">
                 <div class="phase-header">
                     <div class="phase-icon-container">
-                        <span>🚀</span>
+                        <span> </span>
                     </div>
                     <div class="phase-title">
                         <h3>Deployment</h3>
@@ -1003,7 +1003,7 @@
             <div class="phase">
                 <div class="phase-header">
                     <div class="phase-icon-container">
-                        <span>✨</span>
+                        <span> </span>
                     </div>
                     <div class="phase-title">
                         <h3>Runtime Inference</h3>
@@ -1022,7 +1022,7 @@
         <!-- Implementation Section -->
         <div id="implementation" class="section">
             <div class="section-header">
-                <span class="section-icon">💻</span>
+                <span class="section-icon"> </span>
                 <h2>Implementation Plan</h2>
             </div>
 
@@ -1105,7 +1105,7 @@
         <!-- Evaluation Section -->
         <div id="evaluation" class="section">
             <div class="section-header">
-                <span class="section-icon">📊</span>
+                <span class="section-icon"> </span>
                 <h2>Evaluation</h2>
             </div>
 
@@ -1116,10 +1116,10 @@
                             <div class="metric-title">Prediction Accuracy (MSE)</div>
                             <div class="metric-subtitle">Mean squared error of vertex delta predictions</div>
                         </div>
-                        <div class="metric-icon">✓</div>
+                        <div class="metric-icon"> </div>
                     </div>
-                    <div class="metric-value">0.0023<span class="metric-unit">mm²</span></div>
-                    <div class="metric-target">Target: 0.005mm²</div>
+                    <div class="metric-value">0.0023<span class="metric-unit">mm </span></div>
+                    <div class="metric-target">Target: 0.005mm </div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width: 92%;"></div>
                     </div>
@@ -1131,7 +1131,7 @@
                             <div class="metric-title">Runtime Performance</div>
                             <div class="metric-subtitle">Frames per second in Maya viewport</div>
                         </div>
-                        <div class="metric-icon">⚡</div>
+                        <div class="metric-icon"> </div>
                     </div>
                     <div class="metric-value">34<span class="metric-unit">FPS</span></div>
                     <div class="metric-target">Target: 24FPS</div>
@@ -1146,7 +1146,7 @@
                             <div class="metric-title">Time Saved</div>
                             <div class="metric-subtitle">Artist hours saved vs. manual sculpting</div>
                         </div>
-                        <div class="metric-icon">⏱</div>
+                        <div class="metric-icon"> </div>
                     </div>
                     <div class="metric-value">85<span class="metric-unit">%</span></div>
                     <div class="metric-target">Target: 70%</div>
@@ -1157,7 +1157,7 @@
             </div>
 
             <div class="test-results">
-                <h3><span>⏱</span> Test Results: Shoulder/Elbow Case Study</h3>
+                <h3><span> </span> Test Results: Shoulder/Elbow Case Study</h3>
                 <p>Evaluation on a production biped character rig with varying complexity levels</p>
 
                 <div class="test-item">
@@ -1165,7 +1165,7 @@
                         <h4>Shoulder Articulation</h4>
                         <span class="test-accuracy">Accuracy: 96.8%</span>
                     </div>
-                    <div class="test-details">24 test poses • Avg Error: 0.0018mm²</div>
+                    <div class="test-details">24 test poses   Avg Error: 0.0018mm </div>
                 </div>
 
                 <div class="test-item">
@@ -1173,7 +1173,7 @@
                         <h4>Elbow Flexion</h4>
                         <span class="test-accuracy">Accuracy: 94.2%</span>
                     </div>
-                    <div class="test-details">18 test poses • Avg Error: 0.0026mm²</div>
+                    <div class="test-details">18 test poses   Avg Error: 0.0026mm </div>
                 </div>
 
                 <div class="test-item">
@@ -1181,7 +1181,7 @@
                         <h4>Combined Movement</h4>
                         <span class="test-accuracy">Accuracy: 92.5%</span>
                     </div>
-                    <div class="test-details">32 test poses • Avg Error: 0.0031mm²</div>
+                    <div class="test-details">32 test poses   Avg Error: 0.0031mm </div>
                 </div>
             </div>
         </div>
@@ -1189,13 +1189,13 @@
         <!-- Applications Section -->
         <div id="applications" class="section">
             <div class="section-header">
-                <span class="section-icon">🎬</span>
+                <span class="section-icon"> </span>
                 <h2>Applications</h2>
             </div>
 
             <div class="application-card orange">
                 <div class="app-header">
-                    <span class="app-icon">🎬</span>
+                    <span class="app-icon"> </span>
                     <h3>Visual Effects (VFX)</h3>
                 </div>
                 <h4 style="margin-bottom: 1rem; color: var(--text-light); font-size: 0.9rem; text-transform: uppercase;">KEY BENEFITS</h4>
@@ -1217,7 +1217,7 @@
 
             <div class="application-card cyan">
                 <div class="app-header">
-                    <span class="app-icon">✨</span>
+                    <span class="app-icon"> </span>
                     <h3>Animation Studios</h3>
                 </div>
                 <h4 style="margin-bottom: 1rem; color: var(--text-light); font-size: 0.9rem; text-transform: uppercase;">KEY BENEFITS</h4>
@@ -1239,7 +1239,7 @@
 
             <div class="application-card pink">
                 <div class="app-header">
-                    <span class="app-icon">🎮</span>
+                    <span class="app-icon"> </span>
                     <h3>Game Development</h3>
                 </div>
                 <h4 style="margin-bottom: 1rem; color: var(--text-light); font-size: 0.9rem; text-transform: uppercase;">KEY BENEFITS</h4>
@@ -1263,7 +1263,7 @@
         <!-- Future Work Section -->
         <div id="future" class="section">
             <div class="section-header">
-                <span class="section-icon">🚀</span>
+                <span class="section-icon"> </span>
                 <h2>Future Work</h2>
             </div>
 
@@ -1288,7 +1288,7 @@
                 </div>
 
                 <div class="expected-impact">
-                    <span class="expected-impact-icon">💡</span>
+                    <span class="expected-impact-icon"> </span>
                     <div>
                         <strong>Expected Impact</strong>
                         <p>Potential 90%+ time savings on facial correctives</p>
@@ -1317,7 +1317,7 @@
                 </div>
 
                 <div class="expected-impact">
-                    <span class="expected-impact-icon">💡</span>
+                    <span class="expected-impact-icon"> </span>
                     <div>
                         <strong>Expected Impact</strong>
                         <p>Biomechanically accurate deformations without runtime sim costs</p>
@@ -1329,7 +1329,7 @@
         <!-- Conclusion Section -->
         <div id="conclusion" class="section">
             <div class="section-header">
-                <span class="section-icon">✓</span>
+                <span class="section-icon"> </span>
                 <h2>Conclusion</h2>
             </div>
 
@@ -1345,34 +1345,34 @@
                 <h3>Key Contributions</h3>
                 
                 <div class="contribution-item">
-                    <div class="contribution-icon">✓</div>
+                    <div class="contribution-icon"> </div>
                     <div>Novel application of neural networks to pose-based corrective blendshape prediction</div>
                 </div>
 
                 <div class="contribution-item">
-                    <div class="contribution-icon">✓</div>
+                    <div class="contribution-icon"> </div>
                     <div>Complete pipeline from data collection through production deployment</div>
                 </div>
 
                 <div class="contribution-item">
-                    <div class="contribution-icon">✓</div>
+                    <div class="contribution-icon"> </div>
                     <div>Python prototype validation and C++ production implementation strategy</div>
                 </div>
 
                 <div class="contribution-item">
-                    <div class="contribution-icon">✓</div>
+                    <div class="contribution-icon"> </div>
                     <div>Integration methodology for Maya deformer architecture</div>
                 </div>
 
                 <div class="contribution-item">
-                    <div class="contribution-icon">✓</div>
+                    <div class="contribution-icon"> </div>
                     <div>Demonstrated time savings of 70-85% compared to manual workflows</div>
                 </div>
             </div>
 
             <div class="impact-grid">
                 <div class="impact-card cyan">
-                    <h3><span>💡</span> Immediate Impact</h3>
+                    <h3><span> </span> Immediate Impact</h3>
                     <ul>
                         <li>Reduce rigging time from weeks to days</li>
                         <li>Enable rapid character iteration cycles</li>
@@ -1382,7 +1382,7 @@
                 </div>
 
                 <div class="impact-card pink">
-                    <h3><span>🔮</span> Broader Implications</h3>
+                    <h3><span> </span> Broader Implications</h3>
                     <ul>
                         <li>Foundation for AI-assisted rigging workflows</li>
                         <li>Scalable knowledge transfer from senior artists</li>
