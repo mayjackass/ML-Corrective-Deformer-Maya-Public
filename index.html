@@ -7,6 +7,38 @@
     <meta name="description" content="A machine learning-powered corrective deformer system for Autodesk Maya that learns and applies pose-based shape corrections automatically.">
     
     <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -15,11 +47,609 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Segoe UI Symbol', 'Segoe UI Emoji', 'Apple Color Emoji', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             color: #24292f;
             line-height: 1.6;
+            overflow-x: hidden;
         }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        h1 {
+            font-size: 3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #57606a;
+            margin-bottom: 12px;
+            font-weight: 600;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .author {
+            font-size: 1.1em;
+            color: #656d76;
+            margin-bottom: 40px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        .btn {
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 1px solid #d0d7de;
+        }
+        
+        .btn-secondary:hover {
+            background: #f6f8fa;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        
+        .feature {
+            padding: 24px;
+            background: linear-gradient(135deg, #f6f8fa 0%, #ffffff 100%);
+            border-radius: 12px;
+            border: 1px solid #d0d7de;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .feature:nth-child(1) { animation-delay: 0.1s; }
+        .feature:nth-child(2) { animation-delay: 0.2s; }
+        .feature:nth-child(3) { animation-delay: 0.3s; }
+        .feature:nth-child(4) { animation-delay: 0.4s; }
+        .feature:nth-child(5) { animation-delay: 0.5s; }
+        .feature:nth-child(6) { animation-delay: 0.6s; }
+        
+        .feature:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+        
+        .feature p {
+            color: #57606a;
+            font-size: 0.95em;
+        }
+        
+        .section {
+            margin: 40px 0;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .section h2 {
+            color: #24292f;
+            font-size: 1.8em;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #d0d7de;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.6s ease;
+        }
+        
+        .section:hover h2::after {
+            width: 200px;
+        }
+        
+        .section p {
+            color: #57606a;
+            margin-bottom: 16px;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        ul li {
+            padding: 8px 0;
+            color: #57606a;
+            padding-left: 24px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        ul li:hover {
+            padding-left: 32px;
+            color: #667eea;
+        }
+        
+        ul li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        ul li:hover:before {
+            left: 8px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin: 32px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f6f8fa 0%, #ffffff 100%);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .stat:nth-child(1) { animation-delay: 0.2s; }
+        .stat:nth-child(2) { animation-delay: 0.4s; }
+        .stat:nth-child(3) { animation-delay: 0.6s; }
+        
+        .stat:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: #656d76;
+            font-size: 0.9em;
+        }
+        
+        .expandable {
+            margin: 20px 0;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .expandable:hover {
+            border-color: #667eea;
+        }
+        
+        .expandable-header {
+            padding: 16px 20px;
+            background: #f6f8fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .expandable-header:hover {
+            background: #eef1f5;
+        }
+        
+        .expandable-header h3 {
+            margin: 0;
+            color: #24292f;
+            font-size: 1.1em;
+        }
+        
+        .expandable-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+        
+        .expandable.active .expandable-icon {
+            transform: rotate(90deg);
+        }
+        
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 20px;
+        }
+        
+        .expandable.active .expandable-content {
+            max-height: 1000px;
+            padding: 20px;
+        }
+        
+        .code-block {
+            background: #24292f;
+            color: #c9d1d9;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        .code-block code {
+            color: #c9d1d9;
+        }
+        
+        .pulse-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.2em;
+            }
+            
+            .header, .content {
+                padding: 30px 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ML Corrective Deformer for Maya</h1>
+            <p class="subtitle">Pose-Based Corrective Blendshape Prediction Using Machine Learning</p>
+            <p class="author"><span class="pulse-dot"></span>A research implementation by Mayj Amilano</p>
+            
+            <div class="buttons">
+                <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public/archive/refs/heads/main.zip" class="btn btn-primary">
+                    <span>📥 Download Project</span>
+                </a>
+                <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public" class="btn btn-secondary">
+                    <span>💻 View on GitHub</span>
+                </a>
+                <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public#readme" class="btn btn-secondary">
+                    <span>📖 Documentation</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>Overview</h2>
+                <p>This project implements a machine learning-based deformer for Autodesk Maya that automatically predicts corrective blendshapes based on skeletal joint poses. The system learns from artist-provided or simulation-derived data to automate the traditionally manual and time-consuming process of creating corrective shapes for character rigs.</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🤖</div>
+                    <h3>ML-Driven Corrections</h3>
+                    <p>Neural networks predict vertex displacements from joint angles</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Performance</h3>
+                    <p>Optimized for viewport playback in Maya</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Artist-Friendly</h3>
+                    <p>Intuitive UI for data collection and model deployment</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Flexible Training</h3>
+                    <p>Multiple architecture options (Standard, Compact, Residual)</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Production-Ready</h3>
+                    <p>Phased implementation from prototype to C++/LibTorch</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Easy Setup</h3>
+                    <p>Complete installation scripts and test scene generation</p>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Neural Architectures</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">73K</div>
+                    <div class="stat-label">Compact Model Params</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Python Implementation</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Quick Start</h2>
+                
+                <div class="expandable">
+                    <div class="expandable-header" onclick="toggleExpand(this)">
+                        <h3>📦 Installation</h3>
+                        <span class="expandable-icon">▶</span>
+                    </div>
+                    <div class="expandable-content">
+                        <div class="code-block">
+                            <code># 1. Download and extract the project<br>
+# 2. In Maya, run:<br>
+<br>
+import sys<br>
+sys.path.append("path/to/ML_deformerTool")<br>
+<br>
+from phase1_python_prototype import install_deformer<br>
+install_deformer.install()</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="expandable">
+                    <div class="expandable-header" onclick="toggleExpand(this)">
+                        <h3>🎯 Data Collection</h3>
+                        <span class="expandable-icon">▶</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p>Use the Data Collector tool to capture training data:</p>
+                        <div class="code-block">
+                            <code>from utils import data_collector<br>
+collector = data_collector.DataCollector()<br>
+collector.show_ui()</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="expandable">
+                    <div class="expandable-header" onclick="toggleExpand(this)">
+                        <h3>🧠 Train Model</h3>
+                        <span class="expandable-icon">▶</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p>Train your neural network with collected data:</p>
+                        <div class="code-block">
+                            <code>from ml_training import train<br>
+trainer = train.Trainer('data/poses.json')<br>
+trainer.train(epochs=100)<br>
+trainer.export_for_maya('model.pt')</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Key Features</h2>
+                <ul>
+                    <li>Complete Phase 1 Python prototype with Maya Python API 2.0</li>
+                    <li>Three neural network architectures optimized for different use cases</li>
+                    <li>Training pipeline with validation and model export (TorchScript/ONNX)</li>
+                    <li>Data collection tools with automatic and manual capture modes</li>
+                    <li>Installation system with shelf button and test scene generation</li>
+                    <li>Comprehensive documentation and quick-start guides</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>Requirements</h2>
+                <ul>
+                    <li>Autodesk Maya 2020+ (with Python 3.7+)</li>
+                    <li>PyTorch 1.8+</li>
+                    <li>NumPy, SciPy for data processing</li>
+                    <li>GPU recommended for training (CPU supported)</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>Get Started</h2>
+                <p>Download the project and follow the quick-start guide to install the deformer in Maya. The package includes example scenes, training scripts, and complete documentation to help you get up and running quickly.</p>
+                
+                <div class="buttons">
+                    <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public/archive/refs/heads/main.zip" class="btn btn-primary">
+                        <span>Download Now</span>
+                    </a>
+                    <a href="https://github.com/mayjackass/ML-Corrective-Deformer-Maya-Public/blob/main/QUICKSTART.md" class="btn btn-secondary">
+                        <span>Quick Start Guide</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleExpand(header) {
+            const expandable = header.parentElement;
+            expandable.classList.toggle('active');
+        }
+        
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Intersection Observer for animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
         
         .container {
             max-width: 1200px;
