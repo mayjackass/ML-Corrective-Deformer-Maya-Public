@@ -1,8 +1,8 @@
-# 🚀 Getting Started Checklist
+#   Getting Started Checklist
 
 ## Phase 1 Complete! Here's what you have:
 
-### ✅ Core System
+###   Core System
 - [x] Maya deformer plugin (`ml_corrective_deformer.py`)
 - [x] Installation scripts with auto-setup
 - [x] 3 neural network architectures (Standard, Compact, Residual)
@@ -10,7 +10,7 @@
 - [x] Data collection tools with Maya UI
 - [x] Model export (TorchScript & ONNX)
 
-### ✅ Documentation
+###   Documentation
 - [x] Comprehensive README
 - [x] Quick Start guide (5 minutes)
 - [x] Technical architecture docs
@@ -18,16 +18,16 @@
 - [x] Example scripts
 - [x] Project summary
 
-### ✅ Testing
-- [x] Test suite (all tests passing ✓)
+###   Testing
+- [x] Test suite (all tests passing  )
 - [x] Example workflows
 - [x] Demo scenes
 
 ---
 
-## 🎯 Your Next Steps
+##   Your Next Steps
 
-### 1️⃣ Test in Maya (15 minutes)
+### 1  Test in Maya (15 minutes)
 
 Open Maya and run:
 ```python
@@ -50,7 +50,7 @@ exec(open(r"C:\Users\Burn\Documents\maya\scripts\ML_deformerTool\phase1_python_p
 
 ---
 
-### 2️⃣ Collect Real Data (30 minutes)
+### 2  Collect Real Data (30 minutes)
 
 Use one of your existing rigs:
 
@@ -61,15 +61,15 @@ data_collector.create_data_collection_ui()
 
 **Steps:**
 1. [ ] Load your rig in Maya
-2. [ ] Select mesh → "Load Selected Mesh"
-3. [ ] Select joints → "Load Selected Joints"
+2. [ ] Select mesh   "Load Selected Mesh"
+3. [ ] Select joints   "Load Selected Joints"
 4. [ ] Click "Initialize Collector"
 5. [ ] Use "Auto-Capture Range" for quick data
 6. [ ] Save dataset to `data/` folder
 
 ---
 
-### 3️⃣ Train Your First Model (20 minutes)
+### 3  Train Your First Model (20 minutes)
 
 In PowerShell:
 ```powershell
@@ -93,7 +93,7 @@ python train.py --data ../data/your_data.npz `
 
 ---
 
-### 4️⃣ Move to Phase 2 (Next Development)
+### 4  Move to Phase 2 (Next Development)
 
 Phase 2 goals:
 - [ ] Load trained PyTorch models in Maya deformer
@@ -109,7 +109,7 @@ Phase 2 goals:
 
 ---
 
-## 📚 Key Files to Know
+##   Key Files to Know
 
 | File | Purpose | When to Use |
 |------|---------|-------------|
@@ -124,7 +124,7 @@ Phase 2 goals:
 
 ---
 
-## 🎨 Suggested First Project
+##   Suggested First Project
 
 **Project: Simple Elbow Corrective**
 
@@ -134,7 +134,7 @@ Phase 2 goals:
 
 2. **Collect Data** (10 min)
    - Use data collector UI
-   - Auto-capture elbow rotation: 0° to 120°
+   - Auto-capture elbow rotation: 0  to 120 
    - 20 samples
 
 3. **Train** (15 min)
@@ -149,29 +149,29 @@ Phase 2 goals:
 
 ---
 
-## 💡 Tips for Success
+##   Tips for Success
 
 ### Data Collection
-- ✅ Start with 20-30 samples per joint
-- ✅ Sample evenly across rotation range
-- ✅ Include extreme poses
-- ✅ Test with corrective sculpting for best results
+-   Start with 20-30 samples per joint
+-   Sample evenly across rotation range
+-   Include extreme poses
+-   Test with corrective sculpting for best results
 
 ### Training
-- ✅ Use "compact" model for testing (faster)
-- ✅ Start with 50 epochs, increase if needed
-- ✅ Watch validation loss (should decrease)
-- ✅ Lower learning rate if loss plateaus
+-   Use "compact" model for testing (faster)
+-   Start with 50 epochs, increase if needed
+-   Watch validation loss (should decrease)
+-   Lower learning rate if loss plateaus
 
 ### Debugging
-- ✅ Check Maya console for errors
-- ✅ Use Script Editor for Python errors
-- ✅ Test with simple geometry first
-- ✅ Verify joint connections with `listConnections`
+-   Check Maya console for errors
+-   Use Script Editor for Python errors
+-   Test with simple geometry first
+-   Verify joint connections with `listConnections`
 
 ---
 
-## 🐛 Common Issues & Solutions
+##   Common Issues & Solutions
 
 ### "Plugin won't load"
 ```python
@@ -211,9 +211,9 @@ python train.py --model-type compact
 
 ---
 
-## 📊 Success Metrics
+##   Success Metrics
 
-### Phase 1 Success Criteria ✅
+### Phase 1 Success Criteria  
 - [x] Plugin loads in Maya
 - [x] Deformer applies to geometry
 - [x] Data can be collected
@@ -228,7 +228,7 @@ python train.py --model-type compact
 
 ---
 
-## 🎓 Learning Resources
+##   Learning Resources
 
 ### Included in Project
 - Technical paper (your research document)
@@ -243,20 +243,20 @@ python train.py --model-type compact
 
 ---
 
-## 🎉 Ready to Start!
+##   Ready to Start!
 
 Your development environment is complete. You have:
-- ✅ Working Maya plugin
-- ✅ ML training framework
-- ✅ Data collection tools
-- ✅ Complete documentation
-- ✅ All tests passing
+-   Working Maya plugin
+-   ML training framework
+-   Data collection tools
+-   Complete documentation
+-   All tests passing
 
 **Next action**: Open Maya and run the installation script!
 
 ---
 
-## 📞 Need Help?
+##   Need Help?
 
 1. Check `QUICK_REFERENCE.md` for commands
 2. Read `docs/QUICKSTART.md` for tutorials
@@ -266,7 +266,8 @@ Your development environment is complete. You have:
 
 ---
 
-**Good luck with your research! 🚀**
+**Good luck with your research!  **
 
 *ML Corrective Deformer - Phase 1 Complete*  
 *October 17, 2025*
+

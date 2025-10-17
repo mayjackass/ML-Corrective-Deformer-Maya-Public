@@ -1,6 +1,6 @@
 # ML Corrective Deformer - Project Summary
 
-## 🎯 Project Overview
+##   Project Overview
 
 **Title**: Pose-Based Corrective Blendshape Prediction Using Machine Learning in Maya  
 **Author**: Mayj Amilano  
@@ -9,41 +9,41 @@
 
 This project implements a machine learning-based deformer for Autodesk Maya that automatically predicts corrective blendshapes based on skeletal joint poses, automating a traditionally manual rigging process.
 
-## 📦 What's Been Created
+##   What's Been Created
 
 ### Core Components
 
-1. **✅ Maya Deformer Plugin** (`phase1_python_prototype/ml_corrective_deformer.py`)
+1. **  Maya Deformer Plugin** (`phase1_python_prototype/ml_corrective_deformer.py`)
    - Custom MPxDeformerNode
    - Procedural corrective deformations (Phase 1)
    - Attributes for pose angle, weight, and ML toggle
    - Ready for PyTorch integration (Phase 2)
 
-2. **✅ Installation & Setup** (`phase1_python_prototype/install_deformer.py`)
+2. **  Installation & Setup** (`phase1_python_prototype/install_deformer.py`)
    - Automated plugin loading
    - Shelf button creation
    - Test scene generation
    - UI window for quick access
 
-3. **✅ ML Training Framework** (`ml_training/`)
+3. **  ML Training Framework** (`ml_training/`)
    - Three neural network architectures (Standard, Compact, Residual)
    - Complete training pipeline with validation
    - Model export to TorchScript and ONNX
    - Command-line interface
 
-4. **✅ Data Collection Tools** (`utils/data_collector.py`)
+4. **  Data Collection Tools** (`utils/data_collector.py`)
    - DataCollector class for capturing poses
    - CorrectiveSculptingTool for artist workflow
    - Automated pose range sampling
    - Maya UI for data collection
 
-5. **✅ Documentation**
+5. **  Documentation**
    - Comprehensive README with usage guide
    - Quick Start tutorial (5-minute setup)
    - Architecture documentation
    - Example scripts
 
-6. **✅ Configuration**
+6. **  Configuration**
    - Project config file (JSON)
    - Python requirements
    - Git ignore rules
@@ -52,38 +52,38 @@ This project implements a machine learning-based deformer for Autodesk Maya that
 
 ```
 ML_deformerTool/
-├── phase1_python_prototype/           (Phase 1 - Prototype)
-│   ├── ml_corrective_deformer.py     ← Maya plugin
-│   ├── install_deformer.py           ← Installation script
-│   ├── example_basic.py              ← Usage examples
-│   └── example_data_collection.py    ← Data collection demos
-│
-├── ml_training/                       (ML Framework)
-│   ├── model.py                      ← Neural networks (3 architectures)
-│   └── train.py                      ← Training pipeline
-│
-├── utils/                             (Utilities)
-│   └── data_collector.py             ← Data collection tools
-│
-├── phase2_real_dataset/               (Future: ML integration)
-├── phase3_cpp_production/             (Future: C++ optimization)
-├── phase4_artist_workflow/            (Future: Production UI)
-│
-├── data/                              (Training datasets)
-├── models/                            (Trained models)
-├── tests/                             (Unit tests)
-│
-├── docs/                              (Documentation)
-│   ├── QUICKSTART.md                 ← 5-minute tutorial
-│   └── ARCHITECTURE.md               ← Technical architecture
-│
-├── README.md                          ← Main documentation
-├── config.json                        ← Configuration
-├── requirements.txt                   ← Python dependencies
-└── .gitignore                         ← Git ignore rules
+  phase1_python_prototype/           (Phase 1 - Prototype)
+      ml_corrective_deformer.py       Maya plugin
+      install_deformer.py             Installation script
+      example_basic.py                Usage examples
+      example_data_collection.py      Data collection demos
+ 
+  ml_training/                       (ML Framework)
+      model.py                        Neural networks (3 architectures)
+      train.py                        Training pipeline
+ 
+  utils/                             (Utilities)
+      data_collector.py               Data collection tools
+ 
+  phase2_real_dataset/               (Future: ML integration)
+  phase3_cpp_production/             (Future: C++ optimization)
+  phase4_artist_workflow/            (Future: Production UI)
+ 
+  data/                              (Training datasets)
+  models/                            (Trained models)
+  tests/                             (Unit tests)
+ 
+  docs/                              (Documentation)
+      QUICKSTART.md                   5-minute tutorial
+      ARCHITECTURE.md                 Technical architecture
+ 
+  README.md                            Main documentation
+  config.json                          Configuration
+  requirements.txt                     Python dependencies
+  .gitignore                           Git ignore rules
 ```
 
-## 🚀 How to Get Started
+##   How to Get Started
 
 ### 1. Load the Plugin in Maya
 
@@ -122,9 +122,9 @@ cd ml_training
 python train.py --data ../data/your_data.npz --epochs 100
 ```
 
-## 📋 Implementation Status
+##   Implementation Status
 
-### Phase 1: Python Prototype ✅ COMPLETE
+### Phase 1: Python Prototype   COMPLETE
 
 - [x] Python deformer node
 - [x] Procedural corrections (placeholder for ML)
@@ -138,7 +138,7 @@ python train.py --data ../data/your_data.npz --epochs 100
 - [x] Documentation
 - [x] Examples
 
-### Phase 2: ML Integration 🔄 NEXT
+### Phase 2: ML Integration   NEXT
 
 - [ ] Load PyTorch models in Maya
 - [ ] Real-time ML inference in deformer
@@ -146,20 +146,20 @@ python train.py --data ../data/your_data.npz --epochs 100
 - [ ] Model hot-reloading
 - [ ] Performance optimization
 
-### Phase 3: C++ Production ⏳ FUTURE
+### Phase 3: C++ Production   FUTURE
 
 - [ ] C++ deformer node
 - [ ] LibTorch integration
 - [ ] GPU acceleration
 - [ ] Optimized for 10K+ vertices
 
-### Phase 4: Artist Tools ⏳ FUTURE
+### Phase 4: Artist Tools   FUTURE
 
 - [ ] Complete production UI
 - [ ] Automated workflows
 - [ ] Model management system
 
-## 🎓 Key Features
+##   Key Features
 
 ### For Artists
 
@@ -182,7 +182,7 @@ python train.py --data ../data/your_data.npz --epochs 100
 - **Open Architecture**: Easy to extend
 - **Research Paper**: Full technical documentation
 
-## 📊 Technical Specifications
+##   Technical Specifications
 
 ### Neural Network Options
 
@@ -208,7 +208,7 @@ python train.py --data ../data/your_data.npz --epochs 100
 | 1 (Python) | 1,000 | 24 | 20ms |
 | 3 (C++) | 10,000+ | 60+ | <5ms |
 
-## 🔬 Research Foundation
+##   Research Foundation
 
 Based on the technical paper:
 **"Pose-Based Corrective Blendshape Prediction Using Machine Learning in Maya"**
@@ -227,7 +227,7 @@ Based on the technical paper:
 - **Games**: Real-time character corrections
 - **Virtual Production**: On-set character visualization
 
-## 📚 Documentation Available
+##   Documentation Available
 
 1. **README.md** - Main documentation and usage guide
 2. **QUICKSTART.md** - 5-minute tutorial for beginners
@@ -235,7 +235,7 @@ Based on the technical paper:
 4. **Example Scripts** - Working code samples
 5. **Inline Comments** - Documented code throughout
 
-## 🛠️ Dependencies
+##   Dependencies
 
 ### For Maya Plugin
 - Autodesk Maya 2020+
@@ -253,7 +253,7 @@ Install with:
 pip install torch numpy tqdm onnx
 ```
 
-## 🎯 Next Steps for Development
+##   Next Steps for Development
 
 ### Immediate (Phase 2)
 1. Integrate PyTorch model loading in deformer
@@ -273,7 +273,7 @@ pip install torch numpy tqdm onnx
 3. Facial rig support
 4. Game engine integration
 
-## 💡 Usage Examples
+##   Usage Examples
 
 ### Apply to Existing Rig
 
@@ -307,21 +307,21 @@ python ml_training/train.py \
     --epochs 100
 ```
 
-## 🎨 Project Philosophy
+##   Project Philosophy
 
 This project bridges the gap between:
 - **Art & Technology**: Artist-friendly ML tools
 - **Research & Production**: Academic rigor, practical application
 - **Automation & Control**: ML automation with artist override
 
-## 📧 Support & Contact
+##   Support & Contact
 
 - **Author**: Mayj Amilano
 - **Project**: ML Corrective Deformer for Maya
 - **Version**: 1.0.0 (Phase 1)
 - **Status**: Active Development
 
-## 🙏 Acknowledgments
+##   Acknowledgments
 
 - Maya Python API community
 - PyTorch team
@@ -330,11 +330,12 @@ This project bridges the gap between:
 
 ---
 
-**🎉 Ready to start! All Phase 1 components are complete and functional.**
+**  Ready to start! All Phase 1 components are complete and functional.**
 
 **Next**: Test in Maya, collect data, train models, and move to Phase 2!
 
 ---
 
 *Last Updated: October 17, 2025*  
-*Project Status: Phase 1 Complete ✅*
+*Project Status: Phase 1 Complete  *
+

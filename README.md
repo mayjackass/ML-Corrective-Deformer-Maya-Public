@@ -1,6 +1,6 @@
 # ML Corrective Deformer for Maya
 
-> **📱 Visit the interactive project page:** [https://pose-based-correctiv--mayjackass.github.app/](https://pose-based-correctiv--mayjackass.github.app/)
+> **Visit the project page:** [https://pose-based-correctiv--mayjackass.github.app/](https://pose-based-correctiv--mayjackass.github.app/)
 
 **Pose-Based Corrective Blendshape Prediction Using Machine Learning**
 
@@ -12,54 +12,54 @@ This project implements a machine learning-based deformer for Autodesk Maya that
 
 ### Key Features
 
-- 🤖 **ML-Driven Corrections**: Neural networks predict vertex displacements from joint angles
-- ⚡ **Real-Time Performance**: Optimized for viewport playback in Maya
-- 🎨 **Artist-Friendly**: Intuitive UI for data collection and model deployment
-- 📊 **Flexible Training**: Multiple architecture options (Standard, Compact, Residual)
-- 🔧 **Production-Ready**: Phased implementation from prototype to C++/LibTorch
+-   **ML-Driven Corrections**: Neural networks predict vertex displacements from joint angles
+-   **Real-Time Performance**: Optimized for viewport playback in Maya
+-   **Artist-Friendly**: Intuitive UI for data collection and model deployment
+-   **Flexible Training**: Multiple architecture options (Standard, Compact, Residual)
+-   **Production-Ready**: Phased implementation from prototype to C++/LibTorch
 
 ## Project Structure
 
 ```
 ML_deformerTool/
-├── phase1_python_prototype/      # Phase 1: Python proof-of-concept
-│   ├── ml_corrective_deformer.py # Main deformer node
-│   └── install_deformer.py       # Installation & test setup
-├── phase2_real_dataset/          # Phase 2: Real rig integration
-├── phase3_cpp_production/        # Phase 3: C++ + LibTorch
-├── phase4_artist_workflow/       # Phase 4: Artist UI tools
-├── ml_training/                  # Machine learning framework
-│   ├── model.py                  # Neural network architectures
-│   └── train.py                  # Training scripts
-├── utils/                        # Utilities
-│   └── data_collector.py         # Maya data collection tool
-├── data/                         # Training datasets
-├── models/                       # Trained models
-├── docs/                         # Documentation
-└── tests/                        # Unit tests
+  phase1_python_prototype/      # Phase 1: Python proof-of-concept
+      ml_corrective_deformer.py # Main deformer node
+      install_deformer.py       # Installation & test setup
+  phase2_real_dataset/          # Phase 2: Real rig integration
+  phase3_cpp_production/        # Phase 3: C++ + LibTorch
+  phase4_artist_workflow/       # Phase 4: Artist UI tools
+  ml_training/                  # Machine learning framework
+      model.py                  # Neural network architectures
+      train.py                  # Training scripts
+  utils/                        # Utilities
+      data_collector.py         # Maya data collection tool
+  data/                         # Training datasets
+  models/                       # Trained models
+  docs/                         # Documentation
+  tests/                        # Unit tests
 ```
 
 ## Implementation Phases
 
-### ✅ Phase 1: Python Prototype (Current)
+###   Phase 1: Python Prototype (Current)
 - [x] Python deformer node (MPxDeformerNode)
 - [x] Simple procedural corrections
 - [x] Basic attribute system
 - [x] Test scene setup
 
-### 🔄 Phase 2: Real Dataset
+###   Phase 2: Real Dataset
 - [ ] Data collection from actual rigs
 - [ ] PyTorch model integration
 - [ ] Real-time ML inference
 - [ ] Joint attribute connections
 
-### ⏳ Phase 3: C++ Production
+###   Phase 3: C++ Production
 - [ ] C++ deformer node
 - [ ] LibTorch integration
 - [ ] GPU acceleration
 - [ ] Performance optimization
 
-### ⏳ Phase 4: Artist Workflow
+###   Phase 4: Artist Workflow
 - [ ] Complete UI system
 - [ ] Dataset capture tools
 - [ ] Model training pipeline
@@ -220,11 +220,11 @@ device = 'cuda'  # or 'cpu'
 The system uses feedforward neural networks to learn the nonlinear mapping:
 
 ```
-Joint Angles (θ₁, θ₂, ..., θₙ) → Vertex Displacements (Δx, Δy, Δz)
+Joint Angles ( ,  , ...,  )   Vertex Displacements ( x,  y,  z)
 ```
 
 **Input**: Normalized joint angles [-1, 1]  
-**Output**: Vertex displacement vectors [num_vertices × 3]  
+**Output**: Vertex displacement vectors [num_vertices   3]  
 **Loss**: Mean Squared Error (MSE)
 
 ### Data Format
@@ -330,7 +330,7 @@ by Mayj Amilano
 
 - **Corrective Blendshapes**: Artist-sculpted shapes that fix deformation artifacts
 - **Pose-Space Deformation**: Corrections driven by joint configurations
-- **Neural Regression**: ML models learn pose→correction mapping
+- **Neural Regression**: ML models learn pose correction mapping
 - **Real-Time Inference**: Embedded models run during Maya playback
 
 ### Related Work
@@ -430,3 +430,4 @@ If you use this work in research or production:
 **Last Updated**: October 17, 2025  
 **Version**: 1.0.0 (Phase 1)  
 **Status**: Active Development
+

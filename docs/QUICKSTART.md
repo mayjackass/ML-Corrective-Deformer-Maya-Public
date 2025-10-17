@@ -18,10 +18,10 @@ exec(open(r"C:\Users\Burn\Documents\maya\scripts\ML_deformerTool\phase1_python_p
 ```
 
 This will:
-- ✅ Load the ML Corrective Deformer plugin
-- ✅ Create a shelf button for easy access
-- ✅ Generate a test scene with an arm rig
-- ✅ Open the ML Deformer UI
+-   Load the ML Corrective Deformer plugin
+-   Create a shelf button for easy access
+-   Generate a test scene with an arm rig
+-   Open the ML Deformer UI
 
 ### Step 2: Test the Deformer
 
@@ -74,8 +74,8 @@ data_collector.create_data_collection_ui()
 ```
 
 3. **Setup Collection**:
-   - Select your arm mesh → Click "Load Selected Mesh"
-   - Select the three joints → Click "Load Selected Joints"
+   - Select your arm mesh   Click "Load Selected Mesh"
+   - Select the three joints   Click "Load Selected Joints"
    - Click "Initialize Collector"
 
 4. **Capture Data**:
@@ -92,7 +92,7 @@ data_collector.create_data_collection_ui()
 
 **Option B - Manual with Correctives**:
 ```
-1. Set elbow to specific angle (e.g., 45°)
+1. Set elbow to specific angle (e.g., 45 )
 2. Click "Create Corrective Duplicate"
 3. Sculpt corrections on the duplicate mesh
 4. Click "Capture with Corrective"
@@ -129,7 +129,7 @@ python train.py --data ../data/elbow_correctives.npz `
 Epoch [1/100] Train Loss: 0.045123 | Val Loss: 0.052341
 Epoch [2/100] Train Loss: 0.038234 | Val Loss: 0.041232
 ...
-✓ Saved best model (val_loss: 0.001234)
+  Saved best model (val_loss: 0.001234)
 Training completed!
 ```
 
@@ -286,21 +286,22 @@ python train.py --model-type compact
 
 ## Next Steps
 
-1. ✅ **Complete Phase 1**: Familiarize yourself with the prototype
-2. 🔄 **Collect Real Data**: Use your production rigs
-3. 🎯 **Train Models**: Experiment with different architectures
-4. 📊 **Evaluate Results**: Compare with manual correctives
-5. 🚀 **Phase 2**: Integrate PyTorch models into Maya
+1.   **Complete Phase 1**: Familiarize yourself with the prototype
+2.   **Collect Real Data**: Use your production rigs
+3.   **Train Models**: Experiment with different architectures
+4.   **Evaluate Results**: Compare with manual correctives
+5.   **Phase 2**: Integrate PyTorch models into Maya
 
 ---
 
 ## Need Help?
 
-- 📖 Read the full [README.md](README.md)
-- 🔍 Check [config.json](config.json) for settings
-- 💻 Review example scripts in `examples/`
-- 📧 Contact: [Your Email]
+-   Read the full [README.md](README.md)
+-   Check [config.json](config.json) for settings
+-   Review example scripts in `examples/`
+-   Contact: [Your Email]
 
 ---
 
-**Happy Rigging! 🎨🤖**
+**Happy Rigging!  **
+

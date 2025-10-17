@@ -7,28 +7,28 @@ This document describes the technical architecture of the ML Corrective Deformer
 ## High-Level Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                         Maya Scene                          │
-│  ┌────────────┐      ┌─────────────┐      ┌──────────────┐│
-│  │   Joints   │─────▶│ ML Deformer │─────▶│   Geometry   ││
-│  │  (Input)   │      │    Node     │      │   (Output)   ││
-│  └────────────┘      └─────────────┘      └──────────────┘│
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-                    ┌──────────────────┐
-                    │  Trained Model   │
-                    │  (.pt / .onnx)   │
-                    └──────────────────┘
-                              ▲
-                              │
-┌─────────────────────────────┴───────────────────────────────┐
-│                    Training Pipeline                         │
-│  ┌────────────┐      ┌──────────┐      ┌────────────────┐  │
-│  │   Data     │─────▶│  Neural  │─────▶│ Model Export   │  │
-│  │Collection  │      │ Network  │      │  (TorchScript) │  │
-│  └────────────┘      └──────────┘      └────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
+ 
+                          Maya Scene                           
+                  
+       Joints     ML Deformer     Geometry    
+      (Input)               Node                (Output)    
+                  
+ 
+                               
+                               
+                     
+                       Trained Model    
+                       (.pt / .onnx)    
+                     
+                               
+                               
+ 
+                     Training Pipeline                          
+                     
+       Data        Neural    Model Export       
+    Collection           Network            (TorchScript)     
+                     
+ 
 ```
 
 ## Component Architecture
@@ -104,37 +104,37 @@ class CorrectiveSculptingTool:
 
 #### Standard Model (CorrectiveDeformerNet)
 ```
-Input(num_joints) → FC(256) → ReLU → Dropout
-                  → FC(512) → ReLU → Dropout
-                  → FC(512) → ReLU → Dropout
-                  → FC(256) → ReLU → Dropout
-                  → FC(num_vertices * 3)
-                  → Reshape(num_vertices, 3)
+Input(num_joints)   FC(256)   ReLU   Dropout
+                    FC(512)   ReLU   Dropout
+                    FC(512)   ReLU   Dropout
+                    FC(256)   ReLU   Dropout
+                    FC(num_vertices * 3)
+                    Reshape(num_vertices, 3)
 ```
 
 **Parameters**: ~500K-1M (depends on vertex count)
 
 #### Compact Model (CompactCorrectiveNet)
 ```
-Input(num_joints) → FC(128) → ReLU
-                  → FC(256) → ReLU
-                  → FC(128) → ReLU
-                  → FC(pca_components)
-                  → PCA Reconstruction
-                  → Reshape(num_vertices, 3)
+Input(num_joints)   FC(128)   ReLU
+                    FC(256)   ReLU
+                    FC(128)   ReLU
+                    FC(pca_components)
+                    PCA Reconstruction
+                    Reshape(num_vertices, 3)
 ```
 
 **Parameters**: ~50K-100K
 
 #### Residual Model (ResidualCorrectiveNet)
 ```
-Input(num_joints) → FC(hidden_size)
-                  → [ResBlock × N]
-                  → FC(num_vertices * 3)
-                  → Reshape(num_vertices, 3)
+Input(num_joints)   FC(hidden_size)
+                    [ResBlock   N]
+                    FC(num_vertices * 3)
+                    Reshape(num_vertices, 3)
 
 ResBlock:
-    x → FC → ReLU → FC → ReLU → (+) x
+    x   FC   ReLU   FC   ReLU   (+) x
 ```
 
 **Parameters**: ~1M-2M
@@ -182,28 +182,28 @@ for epoch in epochs:
 ### Training Data Flow
 
 ```
-Maya Scene → Data Collector → .npz Dataset → DataLoader
-                                                  ↓
-Model ← Optimizer ← Loss ← Forward Pass ← Training Loop
-  ↓
-TorchScript/ONNX Export → Deployed Model
+Maya Scene   Data Collector   .npz Dataset   DataLoader
+                                                   
+Model   Optimizer   Loss   Forward Pass   Training Loop
+   
+TorchScript/ONNX Export   Deployed Model
 ```
 
 ### Runtime Data Flow (Phase 2+)
 
 ```
-Joint Rotations → Maya Deformer Node → PyTorch Model
-                                            ↓
+Joint Rotations   Maya Deformer Node   PyTorch Model
+                                             
                                     Vertex Corrections
-                                            ↓
+                                             
                                     Deformed Geometry
 ```
 
 ### Phase 1 Data Flow (Current)
 
 ```
-Joint Rotations → Maya Deformer Node → Procedural Correction
-                                            ↓
+Joint Rotations   Maya Deformer Node   Procedural Correction
+                                             
                                     Deformed Geometry
 ```
 
@@ -211,50 +211,50 @@ Joint Rotations → Maya Deformer Node → Procedural Correction
 
 ```
 ML_deformerTool/
-├── phase1_python_prototype/          # Phase 1 implementation
-│   ├── ml_corrective_deformer.py    # Main deformer node
-│   ├── install_deformer.py          # Installation script
-│   ├── example_basic.py             # Basic usage examples
-│   └── example_data_collection.py   # Data collection examples
-│
-├── ml_training/                      # ML training framework
-│   ├── model.py                      # Network architectures
-│   └── train.py                      # Training pipeline
-│
-├── utils/                            # Utility modules
-│   └── data_collector.py            # Data collection tools
-│
-├── data/                             # Training datasets (.npz)
-├── models/                           # Trained models (.pt, .onnx)
-├── docs/                             # Documentation
-├── tests/                            # Unit tests
-│
-├── README.md                         # Main documentation
-├── config.json                       # Configuration
-└── requirements.txt                  # Python dependencies
+  phase1_python_prototype/          # Phase 1 implementation
+      ml_corrective_deformer.py    # Main deformer node
+      install_deformer.py          # Installation script
+      example_basic.py             # Basic usage examples
+      example_data_collection.py   # Data collection examples
+ 
+  ml_training/                      # ML training framework
+      model.py                      # Network architectures
+      train.py                      # Training pipeline
+ 
+  utils/                            # Utility modules
+      data_collector.py            # Data collection tools
+ 
+  data/                             # Training datasets (.npz)
+  models/                           # Trained models (.pt, .onnx)
+  docs/                             # Documentation
+  tests/                            # Unit tests
+ 
+  README.md                         # Main documentation
+  config.json                       # Configuration
+  requirements.txt                  # Python dependencies
 ```
 
 ## Phase Progression
 
-### Phase 1: Python Prototype ✅ (Current)
+### Phase 1: Python Prototype   (Current)
 - Python-based MPxDeformerNode
 - Procedural corrections (no ML yet)
 - Data collection tools
 - Training framework setup
 
-### Phase 2: ML Integration 🔄 (Next)
+### Phase 2: ML Integration   (Next)
 - Load PyTorch models in Maya
 - Real-time ML inference
 - Multiple joint inputs
 - Model hot-reloading
 
-### Phase 3: C++ Production ⏳
+### Phase 3: C++ Production  
 - C++ MPxDeformerNode
 - LibTorch integration
 - GPU acceleration
 - Optimized performance
 
-### Phase 4: Artist Tools ⏳
+### Phase 4: Artist Tools  
 - Complete UI system
 - Automated workflows
 - Model management
@@ -395,3 +395,4 @@ except Exception as e:
 **Last Updated**: October 17, 2025  
 **Version**: 1.0.0  
 **Phase**: Phase 1 - Python Prototype
+

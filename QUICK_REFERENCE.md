@@ -1,6 +1,6 @@
 # Quick Reference Card - ML Corrective Deformer
 
-## 🚀 Installation (Run in Maya Script Editor)
+##   Installation (Run in Maya Script Editor)
 
 ```python
 import maya.cmds as cmds
@@ -13,7 +13,7 @@ cmds.loadPlugin(plugin_path)
 exec(open(r"C:\Users\Burn\Documents\maya\scripts\ML_deformerTool\phase1_python_prototype\install_deformer.py").read())
 ```
 
-## 🎨 Apply Deformer
+##   Apply Deformer
 
 ```python
 # Select mesh and apply
@@ -28,7 +28,7 @@ cmds.setAttr(f"{deformer}.correctionWeight", 1.0)
 cmds.setAttr(f"{deformer}.enableML", True)
 ```
 
-## 📊 Data Collection
+##   Data Collection
 
 ```python
 # Open UI
@@ -45,7 +45,7 @@ collector.capture_pose_range("joint1", "rotateZ", -90, 90, 20)
 collector.save_dataset("../data/my_data.npz")
 ```
 
-## 🧠 Train Model (PowerShell)
+##   Train Model (PowerShell)
 
 ```powershell
 cd "C:\Users\Burn\Documents\maya\scripts\ML_deformerTool\ml_training"
@@ -61,7 +61,7 @@ python train.py --data ../data/my_data.npz `
                 --batch-size 32
 ```
 
-## 📦 Model Architectures
+##   Model Architectures
 
 ```bash
 # Standard (default) - best for general use
@@ -74,7 +74,7 @@ python train.py --model-type compact --data data.npz
 python train.py --model-type residual --data data.npz
 ```
 
-## 🔧 Common Tasks
+##   Common Tasks
 
 ### Check Plugin Status
 ```python
@@ -97,7 +97,7 @@ cmds.getAttr("mlCorrectiveDeformer1.correctionWeight")
 cmds.delete("mlCorrectiveDeformer1")
 ```
 
-## 📁 File Locations
+##   File Locations
 
 | File | Location |
 |------|----------|
@@ -109,7 +109,7 @@ cmds.delete("mlCorrectiveDeformer1")
 | Datasets | `data/*.npz` |
 | Trained Models | `models/*.pt` |
 
-## 🎯 Attributes
+##   Attributes
 
 | Attribute | Type | Range | Default |
 |-----------|------|-------|---------|
@@ -117,7 +117,7 @@ cmds.delete("mlCorrectiveDeformer1")
 | `correctionWeight` | float | 0 to 2 | 1.0 |
 | `enableML` | bool | - | True |
 
-## 💡 Tips & Tricks
+##   Tips & Tricks
 
 ### Animate Corrections
 ```python
@@ -139,10 +139,10 @@ cmds.connectAttr("shoulder.rotateX", f"{deformer2}.poseAngle")
 ### Blend with Blendshapes
 ```python
 # ML deformer works with existing blendshapes
-# Apply order: SkinCluster → Blendshape → MLDeformer
+# Apply order: SkinCluster   Blendshape   MLDeformer
 ```
 
-## 🐛 Troubleshooting
+##   Troubleshooting
 
 ### Plugin Won't Load
 ```python
@@ -174,23 +174,23 @@ python train.py --device cpu --data data.npz
 python train.py --batch-size 8 --data data.npz
 ```
 
-## 📖 Documentation
+##   Documentation
 
 - **Full Guide**: `README.md`
 - **Quick Start**: `docs/QUICKSTART.md`
 - **Architecture**: `docs/ARCHITECTURE.md`
 - **Project Summary**: `PROJECT_SUMMARY.md`
 
-## 🔗 Workflow Summary
+##   Workflow Summary
 
 ```
-1. Create/Load Rig → 2. Collect Data → 3. Train Model → 4. Deploy
-        ↓                    ↓                ↓            ↓
+1. Create/Load Rig   2. Collect Data   3. Train Model   4. Deploy
+                                                            
    (in Maya)        (Data Collection)   (Python)    (Phase 2)
                          UI
 ```
 
-## 🎓 Example Workflow
+##   Example Workflow
 
 ```python
 # 1. Apply deformer
@@ -216,3 +216,4 @@ collector.save_dataset("data/elbow.npz")
 **Save this file for quick reference!**
 
 *ML Corrective Deformer v1.0.0 - Phase 1*
+
