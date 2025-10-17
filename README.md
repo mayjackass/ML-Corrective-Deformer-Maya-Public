@@ -1,5 +1,7 @@
 # ML Corrective Deformer for Maya
 
+> **📱 Visit the interactive project page:** [https://pose-based-correctiv--mayjackass.github.app/](https://pose-based-correctiv--mayjackass.github.app/)
+
 **Pose-Based Corrective Blendshape Prediction Using Machine Learning**
 
 A research implementation by Mayj Amilano
