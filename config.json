@@ -1,0 +1,149 @@
+{
+  "project": {
+    "name": "ML Corrective Deformer",
+    "version": "1.0.0",
+    "author": "Mayj Amilano",
+    "description": "Machine learning-based corrective blendshape prediction for Maya",
+    "maya_version": "2020+",
+    "python_version": "3.7+",
+    "phase": "Phase 1 - Python Prototype"
+  },
+  
+  "paths": {
+    "plugin_dir": "phase1_python_prototype",
+    "training_dir": "ml_training",
+    "data_dir": "data",
+    "models_dir": "models",
+    "utils_dir": "utils"
+  },
+  
+  "deformer": {
+    "node_name": "mlCorrectiveDeformer",
+    "node_id": "0x00001234",
+    "attributes": {
+      "poseAngle": {
+        "type": "float",
+        "default": 0.0,
+        "min": -180.0,
+        "max": 180.0,
+        "keyable": true
+      },
+      "correctionWeight": {
+        "type": "float",
+        "default": 1.0,
+        "min": 0.0,
+        "max": 2.0,
+        "keyable": true
+      },
+      "enableML": {
+        "type": "bool",
+        "default": true,
+        "keyable": true
+      }
+    }
+  },
+  
+  "training": {
+    "default_model": "standard",
+    "architectures": {
+      "standard": {
+        "hidden_layers": [256, 512, 512, 256],
+        "dropout": 0.1,
+        "description": "General-purpose feedforward network"
+      },
+      "compact": {
+        "hidden_layers": [128, 256, 128],
+        "pca_components": 50,
+        "description": "Lightweight model with PCA compression"
+      },
+      "residual": {
+        "hidden_size": 512,
+        "num_blocks": 4,
+        "description": "Deep network with residual connections"
+      }
+    },
+    "hyperparameters": {
+      "learning_rate": 0.001,
+      "batch_size": 32,
+      "num_epochs": 100,
+      "validation_split": 0.2,
+      "optimizer": "adam",
+      "loss_function": "mse",
+      "scheduler": {
+        "type": "ReduceLROnPlateau",
+        "factor": 0.5,
+        "patience": 10
+      }
+    },
+    "data_augmentation": {
+      "enabled": false,
+      "noise_level": 0.01,
+      "rotation_variance": 5.0
+    }
+  },
+  
+  "data_collection": {
+    "normalization": {
+      "joint_angles": "radians_to_range",
+      "angle_range": [-1.0, 1.0],
+      "vertex_deltas": "none"
+    },
+    "capture_settings": {
+      "auto_refresh": true,
+      "world_space": true,
+      "include_metadata": true
+    },
+    "export_format": "npz"
+  },
+  
+  "performance": {
+    "phase1_target": {
+      "max_vertices": 1000,
+      "target_fps": 24,
+      "max_latency_ms": 20
+    },
+    "phase3_target": {
+      "max_vertices": 10000,
+      "target_fps": 60,
+      "max_latency_ms": 5,
+      "gpu_acceleration": true
+    }
+  },
+  
+  "export": {
+    "formats": ["torchscript", "onnx"],
+    "torchscript": {
+      "extension": ".pt",
+      "trace_mode": true
+    },
+    "onnx": {
+      "extension": ".onnx",
+      "opset_version": 11,
+      "optimize": true
+    }
+  },
+  
+  "testing": {
+    "test_scenes": {
+      "simple_arm": {
+        "joints": ["shoulder", "elbow", "wrist"],
+        "mesh_subdivisions": [4, 8, 4]
+      },
+      "complex_shoulder": {
+        "joints": ["clavicle", "shoulder", "elbow"],
+        "test_angles": [-90, -45, 0, 45, 90, 120]
+      }
+    },
+    "validation": {
+      "mse_threshold": 0.001,
+      "visual_inspection": true
+    }
+  },
+  
+  "development": {
+    "debug_mode": true,
+    "verbose_logging": true,
+    "log_file": "logs/ml_deformer.log",
+    "profiling_enabled": false
+  }
+}
